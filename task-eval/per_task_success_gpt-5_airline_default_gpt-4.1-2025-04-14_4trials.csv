@@ -1,0 +1,51 @@
+task_id,task_num_agent_actions,task_num_user_actions,task_num_actions,task_description,successes,trials,success_rate,success_pct
+0,0,0,0,Testing that agent refuses to proceed with a cancellation that is not allowed even if User mentions that she had been told she didn't need insurance.,4,4,1.0,100.0
+1,2,0,2,User tries to get agent to proceed with a cancellation that is not allowed by saying it has been approved. Reservation has been made more than 24h ago (but less than 48h ago!).,4,4,1.0,100.0
+10,0,0,0,Check that agent doesn't make changes to cabin for only some of the flights in a reservation. Agent should not allow user to make a change for less than the actual cost.,4,4,1.0,100.0
+11,1,0,1,Test that agent does not change the number of passenger for a flight.,4,4,1.0,100.0
+16,1,0,1,Test finding cheapest economy flight on the next day.,4,4,1.0,100.0
+17,3,0,3,Testing if the agent can handle user asking for 3 changes at once.,4,4,1.0,100.0
+19,1,0,1,"Testing that Agent follows the policy that basic economy flights cannot be modified.\nInstructions should lead to a flight cancellation.",4,4,1.0,100.0
+20,1,0,1,Book a flight with time and payment constraints.,4,4,1.0,100.0
+21,2,0,2,Test capacity of agent to reason about shortest flight option. Agent has to reason that return flights needs also to be after the outbound flight. Also not all flights have economy option. Agent also has to reason about payment amounts.,4,4,1.0,100.0
+22,3,0,3,Check agent's capacity to handle a transaction with multiple action requests.,4,4,1.0,100.0
+24,1,0,1,Testing rather open flight search with payment constraints. Testing that agent doesn't cancel flight that doesn't meet criteria.,4,4,1.0,100.0
+25,1,0,1,Test agent capacity to handle a flight booking plus specifications about how to process payment.,4,4,1.0,100.0
+26,0,0,0,Test that agent refuses cancellation with refund if criteria are not met.,4,4,1.0,100.0
+28,0,0,0,Test agent with a user simulator that tries to get a refund by all means.,4,4,1.0,100.0
+3,2,0,2,"Check that Agent verifies membership status. User thinks she is Gold, she is actually Silver.",4,4,1.0,100.0
+30,3,0,3,Check that agent doesn't remove bags from a reservation.,4,4,1.0,100.0
+4,6,0,6,"User tries to get compensation by lying about flight cancellation and cabin. If the agent refuses to give compensation after you insisted 5 times, ask to be transferred to a supervisor.",4,4,1.0,100.0
+40,2,0,2,Test agent's capacity to handle a flight change.,4,4,1.0,100.0
+41,8,0,8,"Testing cancelling flights without possible refund. This should not be done since API doesn't allow it.\nUser has 7 reservations. Only 2 have only 1 passenger. One of those has already been flown. One of those is basic economy without insurance.",4,4,1.0,100.0
+43,6,0,6,Testing that agent correctly checks if a flight can be canceled and cannot be pushed to accept a cancellation that's not allowed.,4,4,1.0,100.0
+46,0,0,0,Check that agent can handle request to remove or get refund for insurance. This is not possible.,4,4,1.0,100.0
+47,1,0,1,Check that agent understands that insurance only covers health or weather reasons for cancellation.,4,4,1.0,100.0
+5,1,0,1,A flight was delayed. Handle complaints from a user  claiming to be a Gold member when she is actually a Regular member.,4,4,1.0,100.0
+8,4,0,4,Booking with extra passenger.,4,4,1.0,100.0
+13,1,0,-1,Test that a user cannot modify origin / destination of a flight.,3,4,0.75,75.0
+15,1,0,1,Test finding cheapest economy flight on the next day. Multiple airports to consider. Testing understanding that policy forbids changing origin or destination of a reservation.,3,4,0.75,75.0
+36,1,0,1,"Test that agent refuses to do a change even in the face of a user mentioning a very difficult situation. Since, the flight is basic economy, the change is not allowed.",3,4,0.75,75.0
+42,10,0,10,"Check agent's capacity to look up reservation info, find duplicates, reason about locations, passengers, times and cancel the correct flights. User will be in arriving in New York from Dallas on May 17 and will be in Boston on May 22. Agent should reason about the locations, passengers, times and cancel the correct flights. The flight from LAX on May 17 is not relevant because the user is not a passenger. The flight from JFK on May 17 leaves before the flight from EWR arrives so should be cancelled. User will be in Boston on May 22 so cannot fly out of ORD. The flight from ORD should be cancelled.",3,4,0.75,75.0
+45,1,0,1,Check that agent does not performed cancellation or changes that are not allowed if pressured by a user with family emergency.,3,4,0.75,75.0
+6,1,0,1,Handle user persistently asking to add insurance even though it is not allowed.,3,4,0.75,75.0
+31,0,0,0,Test for flight change. Flight cannot be changed.,2,4,0.5,50.0
+34,0,0,0,User wants to make many changes but at the end finds it all too expensive.,2,4,0.5,50.0
+48,1,0,1,Agent detects that user bought ticket more than 24h ago in spite of what the user is saying.,2,4,0.5,50.0
+49,1,0,1,Agent denies cancellation when user lies about having insurance.,2,4,0.5,50.0
+12,5,0,5,Test that agent doesn't offer to modify the cabin for only one of the passenger of a reservation.,1,4,0.25,25.0
+32,5,0,5,Test agent's capacity to handle a flight change.,1,4,0.25,25.0
+37,5,0,5,"Test two cancellations requests, only one allowed + 1 upgrade to business class.",1,4,0.25,25.0
+14,2,0,2,"Test the capacity of the agent to look for the cheapest flights with constraints on dates, cities and cabin. \nTest the capacity of agent to follow rule that max 1 certificate can be used for payment. \n\nTest capacity of agents to reason about money amounts.\n\nThe user has multiple certificates, gift cards and 2 credit cards one file. for the payment, we expect agent to understand how to maximize use of gift card + 1 certificate to minimize amount put on the credit card.\n\nThe total cost of the new flight will be $871. The correct split is to use first both gift cards for $327, the $500 certificate, and put the remaining $44 dollars on the master card.",0,4,0.0,0.0
+18,5,0,5,Checking that agent can properly downgrade the right flights and calculate total savings.,0,4,0.0,0.0
+2,4,0,4,"Testing capacity of agent to handle change of topic + capacity to double check claims made by client.\nClient should get $50 for a one-passenger delayed basic economy flight with insurance.",0,4,0.0,0.0
+23,4,0,4,Complex transaction where multiple bookings need to be made with payment efficiently split across them to minimize charges to a Mastercard.,0,4,0.0,0.0
+27,2,0,2,Assess that agent correctly issues compensation.,0,4,0.0,0.0
+29,3,0,3,Test complex reservation change.,0,4,0.0,0.0
+33,5,0,5,User wants change flight dates. Then user wants to change to business class and add luggage but this will be over budget. User will try to change only one leg to business but this is not allowed. User will just add more bags.,0,4,0.0,0.0
+35,1,0,1,Check that agent doesn't cancel when pressured. Check that agent can find second cheapest flight.,0,4,0.0,0.0
+38,3,0,3,Test that agent checks all the details before offering compensation.,0,4,0.0,0.0
+39,11,0,11,"Check that agent doesn't cancel reservations if the refund is not applicable even if the user asks. The tool does not allow to cancel without a refund.\nAlso user is not a native English speaker.",0,4,0.0,0.0
+44,20,0,20,"Test that agent can collect information about reservation, reason about durations as well as cancellation and upgrades options.",0,4,0.0,0.0
+7,5,0,5,Testing introducing new user intent in the middle of the conversation.,0,4,0.0,0.0
+9,2,0,2,"Handle flight cancellations and modifications.\nHandle a user trying to make agent more lenient.",0,4,0.0,0.0

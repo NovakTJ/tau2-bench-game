@@ -112,6 +112,7 @@ def get_task_success_rates(results: Results) -> pd.DataFrame:
         "task_num_agent_actions",
         "task_num_user_actions",
         "task_num_actions",
+        "task_description",
     ]
     df_task_infos = df.groupby("task_id").first()[task_columns]
     task_success = df_task_infos.join(grouped)

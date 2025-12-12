@@ -402,6 +402,15 @@ class Results(BaseModel):
                 return True
             return False
 
+        def get_task_description(task: Task) -> str:
+            """Return a short text description for the task."""
+            if task.description and task.description.purpose:
+                return task.description.purpose
+            # Fallback to user instructions if purpose is missing
+            if task.user_scenario and task.user_scenario.instructions:
+                return str(task.user_scenario.instructions)
+            return ""
+
         def get_task_metrics(task: Task) -> dict:
             eval_metrics = (
                 task.evaluation_criteria.info()
@@ -419,6 +428,7 @@ class Results(BaseModel):
                 "task_num_actions": num_actions,
                 "task_num_env_assertions": eval_metrics["num_env_assertions"],
                 "task_num_nl_assertions": eval_metrics["num_nl_assertions"],
+                "task_description": get_task_description(task),
             }
             return info
 

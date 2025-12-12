@@ -1,5 +1,8 @@
 # $\tau^2$-Bench: Evaluating Conversational Agents in a Dual-Control Environment
 
+Run $ tau2 evaluate-trajs -o task-eval paths /workspaces/tau2-bench-game/web/leaderboard/public/submissions/gpt-5_sie
+rra_2025-08-09/trajectories/gpt-5_airline_default_gpt-4.1-2025-04-14_4trials.json
+
 [![python](https://img.shields.io/badge/Python-3.10%2B-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)

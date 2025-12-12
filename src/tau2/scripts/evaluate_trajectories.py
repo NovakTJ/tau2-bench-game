@@ -11,7 +11,7 @@ from rich.progress import Progress
 
 from tau2.data_model.simulation import Results
 from tau2.evaluator.evaluator import EvaluationType, evaluate_simulation
-from tau2.metrics.agent_metrics import compute_metrics
+from tau2.metrics.agent_metrics import compute_metrics, get_task_success_rates
 from tau2.utils.display import ConsoleDisplay
 from tau2.utils.io_utils import expand_paths
 
@@ -133,6 +133,8 @@ def evaluate_trajectories(
             # Display metrics
             metrics = compute_metrics(updated_results)
             ConsoleDisplay.display_agent_metrics(metrics)
+            task_success = get_task_success_rates(updated_results)
+            ConsoleDisplay.display_task_success_rates(task_success)
 
             # Save updated results if output directory is provided
             if output_dir:
@@ -140,6 +142,15 @@ def evaluate_trajectories(
                 output_file = output_path / f"updated_{input_filename}"
                 updated_results.save(output_file)
                 console.print(f"  💾 Saved to: {output_file}", style="blue")
+
+                per_task_file = (
+                    output_path / f"per_task_success_{Path(input_filename).stem}.csv"
+                )
+                task_success.to_csv(per_task_file, index=False)
+                console.print(
+                    f"  📝 Saved per-task success rates to: {per_task_file}",
+                    style="blue",
+                )
 
         except Exception as e:
             console.print(f"  ❌ Error processing file: {e}", style="red")

@@ -94,6 +94,34 @@ def get_tasks_pass_hat_k(results: Results) -> pd.DataFrame:
     return df_pass_hat_k
 
 
+def get_task_success_rates(results: Results) -> pd.DataFrame:
+    """
+    Compute per-task success rates (fraction of successful trials).
+    Returns a dataframe with success counts, total trials, and percentage.
+    """
+    df, _ = get_metrics_df(results)
+
+    grouped = df.groupby("task_id")["success"].agg(
+        successes="sum", trials="count", success_rate="mean"
+    )
+    grouped["successes"] = grouped["successes"].astype(int)
+    grouped["trials"] = grouped["trials"].astype(int)
+    grouped["success_pct"] = grouped["success_rate"] * 100
+
+    task_columns = [
+        "task_num_agent_actions",
+        "task_num_user_actions",
+        "task_num_actions",
+    ]
+    df_task_infos = df.groupby("task_id").first()[task_columns]
+    task_success = df_task_infos.join(grouped)
+    task_success = task_success.reset_index().rename(columns={"index": "task_id"})
+    task_success = task_success.sort_values(
+        by=["success_pct", "task_id"], ascending=[False, True]
+    )
+    return task_success
+
+
 def prepare_dfs(results: Results) -> tuple[pd.DataFrame, pd.DataFrame]:
     df, max_k = get_metrics_df(results)
     df_pass_hat_k = get_tasks_pass_hat_k(results)

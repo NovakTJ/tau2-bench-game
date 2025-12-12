@@ -1,6 +1,8 @@
 import json
 from typing import List, Optional
 
+import pandas as pd
+
 from rich.console import Console
 from rich.layout import Layout
 from rich.panel import Panel
@@ -359,6 +361,36 @@ class ConsoleDisplay:
         )
 
         cls.console.print(metrics_panel)
+
+    @classmethod
+    def display_task_success_rates(cls, task_success_df: pd.DataFrame):
+        """Render per-task success percentages in a table."""
+
+        table = Table(
+            title="[bold blue]Per-Task Success Rates",
+            border_style="blue",
+            show_lines=False,
+        )
+        table.add_column("Task ID", style="bold white")
+        table.add_column("Trials", justify="right")
+        table.add_column("Successes", justify="right")
+        table.add_column("Success %", justify="right")
+        table.add_column("Agent Actions", justify="right")
+        table.add_column("User Actions", justify="right")
+        table.add_column("Total Actions", justify="right")
+
+        for _, row in task_success_df.iterrows():
+            table.add_row(
+                str(row["task_id"]),
+                f"{int(row['trials'])}",
+                f"{int(row['successes'])}",
+                f"{row['success_pct']:.1f}%",
+                f"{int(row['task_num_agent_actions'])}",
+                f"{int(row['task_num_user_actions'])}",
+                f"{int(row['task_num_actions'])}",
+            )
+
+        cls.console.print(table)
 
 
 class MarkdownDisplay:
